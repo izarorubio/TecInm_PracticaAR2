@@ -30,7 +30,8 @@ public class GemaSpawner : MonoBehaviour
         for (int i = 0; i < GameParameters.gemasVerticales && i < verticales.Count; i++)
         {
             Vector3 pos = verticales[i].transform.position + Vector3.forward * 0.05f;
-            GameObject gema = Instantiate(gemaVerticalPrefab, pos, Quaternion.identity);
+            Quaternion rotacionVertical = Quaternion.Euler(0, 0, 90);
+            GameObject gema = Instantiate(gemaVerticalPrefab, pos, rotacionVertical);
             gema.tag = "Gema";
         }
 
