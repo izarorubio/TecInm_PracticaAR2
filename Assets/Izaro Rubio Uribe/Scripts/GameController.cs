@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     private float tiempoRestante;
 
     private bool juegoActivo = false;
+
     void Start()
     {
         panelInicial.SetActive(true);
@@ -28,11 +29,11 @@ public class GameController : MonoBehaviour
         if (!juegoActivo) return;
 
         tiempoRestante -= Time.deltaTime;
-        tiempoTexto.text = "Tiempo restante: " + Mathf.CeilToInt(tiempoRestante).ToString();
+        tiempoTexto.text = "TIEMPO: " + Mathf.CeilToInt(tiempoRestante).ToString();
 
         if (tiempoRestante <= 0)
         {
-            FinDelJuego();
+            FinDelJuego(false);  // pierde si se acaba el tiempo sin recoger todas
         }
     }
 
@@ -66,19 +67,27 @@ public class GameController : MonoBehaviour
 
         if (gemasRecogidas >= totalGemas)
         {
-            FinDelJuego();
+            FinDelJuego(true);  // gana si recoge todas las gemas antes del tiempo
         }
     }
 
     void ActualizarContador()
     {
-        gemasTexto.text = $"Gemas recogidas: {gemasRecogidas}/{totalGemas}";
+        gemasTexto.text = $"GEMAS RECOGIDAS: {gemasRecogidas}/{totalGemas}";
     }
 
-    void FinDelJuego()
+    void FinDelJuego(bool win)
     {
         juegoActivo = false;
-        tiempoTexto.text = "¡Fin del juego!";
+
+        if (win)
+        {
+            tiempoTexto.text = "Fin del juego. ¡Has ganado!";
+        }
+        else
+        {
+            tiempoTexto.text = "Se acabó el tiempo. Has perdido.";
+        }
     }
 
     public void VolverAlMenu()
