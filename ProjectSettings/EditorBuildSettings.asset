@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Izaro Rubio Uribe/Scenes/Scene1.unity
     guid: 5e0df81946c88c545a1464a589e5c2d7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Izaro Rubio Uribe/Scenes/Scene2.unity
     guid: cb33355a035759942b9f3be07ecda5ec
   m_configObjects:
