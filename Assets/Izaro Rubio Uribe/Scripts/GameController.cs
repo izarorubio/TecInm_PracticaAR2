@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour
     private int totalGemas;
     private float tiempoRestante;
 
+    public AudioSource audioSource;     
+    public AudioClip contrarelojClip;
+
     private bool juegoActivo = false;
 
     void Start()
@@ -47,6 +50,14 @@ public class GameController : MonoBehaviour
         juegoActivo = true;
         panelInicial.SetActive(false);
         panelContadores.SetActive(true);
+
+        // Reproducir audio contrareloj
+        if (audioSource != null && contrarelojClip != null)
+        {
+            audioSource.clip = contrarelojClip;
+            audioSource.Play();
+        }
+
     }
 
     public void RecogerGema(GameObject gema)
@@ -79,6 +90,13 @@ public class GameController : MonoBehaviour
     void FinDelJuego(bool win)
     {
         juegoActivo = false;
+
+        // Detener el audio si está sonando
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
 
         if (win)
         {
