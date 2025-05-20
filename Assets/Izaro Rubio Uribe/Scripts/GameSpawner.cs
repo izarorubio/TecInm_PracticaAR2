@@ -17,9 +17,11 @@ public class GemaSpawner : MonoBehaviour
 
     public void CrearGemas()
     {
+        // Obtener los planos detectados
         List<ARPlane> horizontales = planeCounter.ObtenerPlanosHorizontales();
         List<ARPlane> verticales = planeCounter.ObtenerPlanosVerticales();
 
+        // Instanciar las gemas horizontales sobre los planos horizontales
         for (int i = 0; i < GameParameters.gemasHorizontales && i < horizontales.Count; i++)
         {
             Vector3 pos = horizontales[i].transform.position + Vector3.up * 0.05f;
@@ -27,6 +29,7 @@ public class GemaSpawner : MonoBehaviour
             gema.tag = "Gema";
         }
 
+        // Instanciar las gemas verticales con rotación
         for (int i = 0; i < GameParameters.gemasVerticales && i < verticales.Count; i++)
         {
             Vector3 pos = verticales[i].transform.position + Vector3.forward * 0.05f;
@@ -35,6 +38,7 @@ public class GemaSpawner : MonoBehaviour
             gema.tag = "Gema";
         }
 
+        // Inicia el juego
         gameController.EmpezarJuego(GameParameters.tiempo);
     }
 }

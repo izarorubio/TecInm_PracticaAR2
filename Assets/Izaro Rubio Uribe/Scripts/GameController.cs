@@ -23,14 +23,15 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        panelInicial.SetActive(true);
-        panelContadores.SetActive(false); // <--- esto oculta el panel al iniciar
+        panelInicial.SetActive(true); // panel incial activado
+        panelContadores.SetActive(false); // oculta el panel al iniciar
     }
 
     void Update()
     {
         if (!juegoActivo) return;
 
+        // Resta tiempo al cronómetro
         tiempoRestante -= Time.deltaTime;
         tiempoTexto.text = "TIEMPO: " + Mathf.CeilToInt(tiempoRestante).ToString();
 
@@ -62,11 +63,12 @@ public class GameController : MonoBehaviour
 
     public void RecogerGema(GameObject gema)
     {
+        // Reproducir el sonido de recogida si existe
         AudioSource audio = gema.GetComponent<AudioSource>();
         if (audio != null && audio.clip != null)
         {
             audio.Play();
-            Destroy(gema, audio.clip.length); // espera a que termine el sonido
+            Destroy(gema, audio.clip.length); // espera a que termine el sonido y destruye la gema
         }
         else
         {
@@ -97,7 +99,7 @@ public class GameController : MonoBehaviour
             audioSource.Stop();
         }
 
-
+        // Muestra mensaje final dependiendo si se gana o no
         if (win)
         {
             tiempoTexto.text = "Fin del juego. ¡Has ganado!";
@@ -106,10 +108,5 @@ public class GameController : MonoBehaviour
         {
             tiempoTexto.text = "Se acabó el tiempo. Has perdido.";
         }
-    }
-
-    public void VolverAlMenu()
-    {
-        SceneManager.LoadScene(0);
     }
 }
